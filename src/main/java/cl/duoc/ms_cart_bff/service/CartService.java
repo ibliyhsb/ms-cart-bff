@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import cl.duoc.ms_cart_bff.clients.CartBsFeingClient;
-import feign.FeignException.FeignClientException;
 
 @Service
 public class CartService {
@@ -13,21 +12,12 @@ public class CartService {
     CartBsFeingClient cartBsFeingClient;
     
     public ResponseEntity<?> getCartById(Long idCart){
-    try {
-    return ResponseEntity.ok(cartBsFeingClient.getCartById(idCart));}
-    catch(FeignClientException feignClientException){
-        return ResponseEntity.status(feignClientException.status()).body(feignClientException.contentUTF8());
-        }
+    return ResponseEntity.ok(cartBsFeingClient.getCartById(idCart));
     }
 
-    public ResponseEntity<?> insertCart (Long idCustomer) {    
-        try{   
-            return cartBsFeingClient.insertCart(idCustomer);
-        }
-        catch(FeignClientException feignClientException){
-            return ResponseEntity.status(feignClientException.status()).body(feignClientException.contentUTF8());
-      }
-        
+
+    public ResponseEntity<String> insertCart (Long idCustomer) {       
+    return cartBsFeingClient.insertCart(idCustomer);
     }  
     
     public ResponseEntity<String> insertProduct (Long idProduct, Long idCart) {
@@ -35,11 +25,6 @@ public class CartService {
     }
     
     public ResponseEntity<String> deleteProduct(String productName, Long idCart){
-        try{
-            return cartBsFeingClient.deleteProduct(productName, idCart);
-        }
-        catch(FeignClientException feignClientException){
-            return ResponseEntity.status(feignClientException.status()).body(feignClientException.contentUTF8());
-        }
+    return cartBsFeingClient.deleteProduct(productName, idCart);
     }    
 }

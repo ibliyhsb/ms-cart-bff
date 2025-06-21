@@ -17,7 +17,7 @@ public interface CartBsFeingClient {
     public CartDTO getCartById(@PathVariable("idCart") Long idCart);
     
     @PostMapping("/api/Cart/insertCart/{idCustomer}")
-    public ResponseEntity<?> insertCart (@PathVariable("idCustomer") Long idCustomer);
+    public ResponseEntity<String> insertCart (@PathVariable("idCustomer") Long idCustomer);
     
     @PostMapping("/api/Cart/insertProduct/{idProduct}/{idCart}")
     public ResponseEntity<String> insertProduct (@PathVariable("idProduct") Long idProduct, @PathVariable("idCart") Long idCart);
